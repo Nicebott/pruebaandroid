@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation"
 import { appsData } from "@/lib/apps-data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -8,36 +7,7 @@ import { Star, Download, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { ScrollToTop } from "@/components/scroll-to-top"
 
-interface CategoryPageProps {
-  params: Promise<{
-    name: string
-  }>
-}
-
-const categoryMap: Record<string, string> = {
-  juegos: "Juegos",
-  música: "Música",
-  video: "Video",
-  fotografía: "Fotografía",
-  social: "Redes Sociales",
-  compras: "Compras",
-  herramientas: "Herramientas",
-  educación: "Educación",
-  comunicación: "Comunicación",
-  entretenimiento: "Entretenimiento",
-}
-
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { name } = await params
-  const decodedName = decodeURIComponent(name)
-  const categoryName = categoryMap[decodedName] || decodedName
-
-  const filteredApps = appsData.filter((app) => app.category.toLowerCase() === categoryName.toLowerCase())
-
-  if (filteredApps.length === 0) {
-    notFound()
-  }
-
+export default function AllAppsPage() {
   return (
     <div className="min-h-screen bg-background">
       <ScrollToTop />
@@ -52,14 +22,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </Link>
 
         <div className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold">{categoryName}</h1>
-          <p className="text-muted-foreground">
-            {filteredApps.length} {filteredApps.length === 1 ? "aplicación encontrada" : "aplicaciones encontradas"}
-          </p>
+          <h1 className="mb-2 text-4xl font-bold">Todas las Aplicaciones</h1>
+          <p className="text-muted-foreground">{appsData.length} aplicaciones y juegos disponibles</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredApps.map((app) => (
+          {appsData.map((app) => (
             <Link key={app.id} href={`/app/${app.id}`}>
               <Card className="group overflow-hidden transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/20">
                 <div className="p-6">

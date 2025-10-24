@@ -1,14 +1,26 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card } from "@/components/ui/card"
+import { ScrollToTop } from "@/components/scroll-to-top"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 export default function CookiesPage() {
   return (
     <div className="min-h-screen bg-background">
+      <ScrollToTop />
       <Header />
 
       <main className="container mx-auto px-4 py-12">
         <div className="mx-auto max-w-4xl">
+          <Link href="/">
+            <Button variant="ghost" className="mb-6">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Volver al inicio
+            </Button>
+          </Link>
+
           <h1 className="mb-6 text-4xl font-bold">Política de Cookies</h1>
           <p className="mb-8 text-muted-foreground">Última actualización: 23 de octubre de 2025</p>
 

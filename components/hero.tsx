@@ -6,13 +6,17 @@ import { useState } from "react"
 import { Search, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
 
 export function Hero() {
   const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter()
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Buscando:", searchQuery)
+    if (searchQuery.trim()) {
+      router.push(`/buscar?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
   }
 
   return (
